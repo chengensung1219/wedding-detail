@@ -51,7 +51,7 @@ body {
 .title {
     font-family: var(--font-title);
     font-size: 3.5rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
     letter-spacing: 2px;
@@ -281,6 +281,110 @@ body {
     border-style: dashed;
     color: #999;
     border-color: #999;
+}
+
+.registry-section.v2 {
+    padding: 3.5rem 2rem;
+    text-align: center;
+    position: relative;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    margin-top: 30px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.registry-section.v2::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid rgba(125, 99, 90, 0.1);
+    border-radius: 18px;
+    pointer-events: none;
+}
+
+.registry-section.v2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(125, 99, 90, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.decorative-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.6;
+}
+
+.divider-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+}
+
+.divider-icon {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.handwritten-accent {
+    display: block;
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.registry-section.v2 .event-title {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.registry-message {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin: 0 auto 2.5rem;
+    max-width: 480px;
+    opacity: 0.85;
+}
+
+.registry-btn {
+    font-weight: 600;
+    padding: 1rem 3rem;
+    border-width: 2px;
+}
+
+.registry-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 25px rgba(125, 99, 90, 0.3);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.registry-section.v2 .registry-info {
+    animation: fadeInUp 1s ease-out;
 }
 
 @media (max-width: 600px) {
