@@ -63,6 +63,30 @@ body {
     letter-spacing: 3px;
     color: var(--accent-color);
     opacity: 0.8;
+    margin-bottom: 2rem;
+}
+
+.hero-image-container {
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 350px;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transform: rotate(-1deg);
+    transition: transform 0.4s ease;
+}
+
+.hero-image-container:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
 }
 
 .rsvp-card {
