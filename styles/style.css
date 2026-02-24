@@ -37,9 +37,9 @@ body {
 }
 
 .container {
-    width: 93%;
+    width: 90%;
     max-width: 600px;
-    padding: 2rem 1rem;
+    padding: 2rem;
     text-align: center;
     animation: fadeIn 1.2s ease-out;
 }
@@ -396,11 +396,11 @@ body {
     }
 
     .rsvp-details {
-        width: 100%;
+        width: 93%;
     }
 
     .container {
-        width: 100%;
+        width: 93%;
         padding: 2rem 10px;
     }
 
