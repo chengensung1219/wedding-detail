@@ -9,6 +9,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Meddon&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <title>Our Wedding Celebration</title>
 </head>
@@ -21,26 +24,123 @@
             <p class="subtitle">We can't wait to celebrate with you</p>
         </header>
 
+        <section class="countdown-section">
+            <h2 id="countdown-title" class="section-title">Counting Down</h2>
+            <div id="countdown" class="countdown-container">
+                <div class="countdown-item">
+                    <span id="days" class="countdown-value">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours" class="countdown-value">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes" class="countdown-value">00</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds" class="countdown-value">00</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+        </section>
+
         <section class="rsvp-card">
-            <div class="rsvp-item">
-                <p class="event-date">April 18, 2026</p>
-                <h2 class="event-title">US Reception</h2>
-                <a href="https://forms.gle/UjeCFNx4yzDQLetUA" target="_blank" rel="noopener noreferrer" class="btn">
-                    美國婚招 RSVP
-                </a>
+            <div id="rsvp-us" class="rsvp-item">
+                <div class="rsvp-info">
+                    <p class="event-date">April 18, 2026</p>
+                    <h2 class="event-title">US Reception</h2>
+                    <a href="https://forms.gle/UjeCFNx4yzDQLetUA" target="_blank" rel="noopener noreferrer" class="btn">
+                        美國婚招 RSVP
+                    </a>
+                </div>
+                <div class="rsvp-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Time</span>
+                        <span class="detail-text">2 P.M. (MST)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Location</span>
+                        <span class="detail-text">1011 N. 12th W. Rexburg, ID 83440</span>
+                    </div>
+                </div>
             </div>
 
             <hr class="divider">
 
-            <div class="rsvp-item">
-                <p class="event-date">August 29, 2026</p>
-                <h2 class="event-title">Taiwan Reception</h2>
-                <a href="http://" target="_blank" rel="noopener noreferrer" class="btn">
-                    台灣婚招 RSVP
-                </a>
+            <div id="rsvp-tw" class="rsvp-item">
+                <div class="rsvp-info">
+                    <p class="event-date">August 29, 2026</p>
+                    <h2 class="event-title">Taiwan Reception</h2>
+                    <a href="https://forms.gle/juA4TT9gWTnfZ8nVA" target="_blank" rel="noopener noreferrer" class="btn">
+                        台灣婚招 RSVP
+                    </a>
+                </div>
+                <div class="rsvp-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Time</span>
+                        <span class="detail-text">2 P.M. (GMT+8)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Location</span>
+                        <span class="detail-text">桃園市桃園區同安街336巷59號</span>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
+
+    <script>
+        // Target dates with timezones
+        const usDate = new Date("2026-04-18T00:00:00-06:00").getTime();
+        const twDate = new Date("2026-08-29T00:00:00+08:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            let targetDate, title;
+
+            // Check which date to target
+            if (now < usDate) {
+                targetDate = usDate;
+                title = "Counting Down to US Reception";
+            } else {
+                targetDate = twDate;
+                title = "Counting Down to Taiwan Reception";
+                // Add passed class to US RSVP
+                document.getElementById('rsvp-us').classList.add('passed');
+            }
+
+            if (now > twDate) {
+                targetDate = twDate;
+                title = "Event Ended";
+                // Add passed class to US RSVP
+                document.getElementById('rsvp-tw').classList.add('passed');
+            }
+
+            document.getElementById('countdown-title').innerHTML = title;
+
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<div class='celebrate-text'>LET'S CELEBRATE!</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 
 </html>
