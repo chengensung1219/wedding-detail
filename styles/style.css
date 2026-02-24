@@ -352,6 +352,7 @@ body {
 
 .registry-message {
     font-size: 1.05rem;
+    font-family: var(--font-sans);
     line-height: 1.8;
     color: var(--text-color);
     margin: 0 auto 2.5rem;
@@ -405,7 +406,7 @@ body {
     }
 
     .rsvp-card {
-        padding: 2rem 1rem;
+        padding: 2rem 5px;
     }
 
     .countdown-container {
