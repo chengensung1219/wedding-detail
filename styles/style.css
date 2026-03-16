@@ -4,9 +4,16 @@
     --bg-color: #fefae0;
     --text-color: #4a4a4a;
     --card-bg: rgba(255, 255, 255, 0.7);
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Lato', sans-serif;
+    --font-serif: 'Baloo 2', sans-serif;
+    --font-sans: 'Baloo 2', sans-serif;
     --font-title: 'Meddon', serif;
+}
+
+/* Override fonts when HTML language is set to Chinese */
+:lang(zh) {
+    --font-serif: 'Baloo 2', 'Noto Serif TC', serif;
+    --font-sans: 'Baloo 2', 'Noto Serif TC', sans-serif;
+    --font-title: 'Baloo 2', 'Noto Serif TC', serif;
 }
 
 * {
@@ -74,12 +81,11 @@ body {
     background: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    transform: rotate(-1deg);
     transition: transform 0.4s ease;
 }
 
 .hero-image-container:hover {
-    transform: rotate(0deg) scale(1.02);
+    transform: scale(1.02);
 }
 
 .hero-image {
@@ -87,6 +93,47 @@ body {
     height: auto;
     display: block;
     border-radius: 2px;
+    transition: opacity 0.4s ease; /* Smooth transition for photo swap */
+}
+
+/* Slideshow Navigation Buttons */
+.hero-image-container {
+    position: relative; /* Need this for button placement */
+}
+
+.slideshow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    border: none;
+    color: var(--primary-color);
+    padding: 1rem 0.6rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 10;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.hero-image-container:hover .slideshow-btn {
+    opacity: 1;
+}
+
+.slideshow-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--accent-color);
+}
+
+.prev-btn {
+    left: 10px;
+    border-radius: 0 8px 8px 0;
+}
+
+.next-btn {
+    right: 10px;
+    border-radius: 8px 0 0 8px;
 }
 
 .rsvp-card {
@@ -525,5 +572,189 @@ body {
 
     .countdown-value {
         font-size: 1.4rem;
+    }
+}
+
+/* Tabs Styling */
+.tabs-container {
+    width: 100%;
+    margin-bottom: 3rem;
+    animation: fadeIn 1s ease-out;
+}
+
+.tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.8rem 1rem;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+    letter-spacing: 1px;
+}
+
+.tab-btn:hover {
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    opacity: 1;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+}
+
+.tab-content {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.tab-content.active {
+    opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .tabs-header {
+        gap: 0.5rem;
+    }
+
+    .tab-btn {
+        font-size: 1rem;
+        padding: 0.6rem 0.5rem;
+    }
+}
+
+/* Q&A Styling */
+.qa-container {
+    max-width: 550px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.qa-item {
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(125, 99, 90, 0.15);
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.qa-item:hover {
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 8px 25px rgba(125, 99, 90, 0.08);
+    transform: translateY(-2px);
+}
+
+.qa-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.qa-question:hover {
+    color: var(--accent-color);
+}
+
+.qa-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--accent-color);
+}
+
+.qa-question.active .qa-icon {
+    transform: rotate(45deg);
+    color: var(--primary-color);
+}
+
+.qa-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.qa-answer p {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    color: var(--text-color);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    text-align: left;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s ease 0.1s;
+}
+
+.qa-question.active+.qa-answer p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dress Code Image */
+.dress-code-img {
+    width: 100%;
+    height: 100px;
+    /* Cropped height */
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(125, 99, 90, 0.15);
+    transition: transform 0.4s ease;
+}
+
+.dress-code-img:hover {
+    transform: scale(1.02);
+}
+
+/* Dress Code Colors */
+.dress-code-colors {
+    display: flex;
+    gap: 15px;
+    margin: 12px 0;
+    align-items: center;
+}
+
+.color-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.color-circle:hover {
+    transform: scale(1.15) translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .color-circle {
+        width: 30px;
+        height: 30px;
+        gap: 10px;
     }
 }

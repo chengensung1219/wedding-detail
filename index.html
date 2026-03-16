@@ -9,21 +9,31 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Meddon&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <title>Our Wedding Celebration</title>
 </head>
 
 <body>
+    <div style="position: absolute; top: 1rem; right: 1rem; z-index: 100;">
+        <button id="lang-toggle" onclick="toggleLanguage()" class="btn"
+            style="padding: 0.4rem 1rem; font-size: 0.8rem; min-width: auto; background: var(--card-bg); backdrop-filter: blur(5px);">中文</button>
+    </div>
+
     <div class="background-overlay"></div>
     <main class="container">
         <header class="hero">
-            <h1 class="title">Our Wedding</h1>
-            <p class="subtitle">We can't wait to celebrate with you</p>
+            <h1 class="title" data-i18n="heroTitle">Our Wedding</h1>
+            <p class="subtitle" data-i18n="heroSubtitle">We can't wait to celebrate with you</p>
             <div class="hero-image-container">
-                <img src="images/IMG_0464 2.JPG" alt="Our Wedding Photo" class="hero-image">
+                <img src="images/IMG_0464 2.JPG" alt="Our Wedding Photo" class="hero-image" id="hero-photo">
+                <button class="slideshow-btn prev-btn" onclick="changeHeroPhoto(-1)">&#10094;</button>
+                <button class="slideshow-btn next-btn" onclick="changeHeroPhoto(1)">&#10095;</button>
             </div>
         </header>
 
@@ -32,105 +42,253 @@
             <div id="countdown" class="countdown-container">
                 <div class="countdown-item">
                     <span id="days" class="countdown-value">00</span>
-                    <span class="countdown-label">Days</span>
+                    <span class="countdown-label" data-i18n="days">Days</span>
                 </div>
                 <div class="countdown-item">
                     <span id="hours" class="countdown-value">00</span>
-                    <span class="countdown-label">Hours</span>
+                    <span class="countdown-label" data-i18n="hours">Hours</span>
                 </div>
                 <div class="countdown-item">
                     <span id="minutes" class="countdown-value">00</span>
-                    <span class="countdown-label">Mins</span>
+                    <span class="countdown-label" data-i18n="mins">Mins</span>
                 </div>
                 <div class="countdown-item">
                     <span id="seconds" class="countdown-value">00</span>
-                    <span class="countdown-label">Secs</span>
+                    <span class="countdown-label" data-i18n="secs">Secs</span>
                 </div>
             </div>
         </section>
 
-        <section class="rsvp-card">
-            <div id="rsvp-us" class="rsvp-item">
-                <div class="rsvp-info">
-                    <p class="event-date">April 18, 2026</p>
-                    <h2 class="event-title">US Reception</h2>
-                    <a href="https://forms.gle/UjeCFNx4yzDQLetUA" target="_blank" rel="noopener noreferrer" class="btn">
-                        美國婚招 RSVP
-                    </a>
-                </div>
-                <div class="rsvp-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Time</span>
-                        <span class="detail-text">2 P.M. (MST)</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Location</span>
-                        <a href="https://maps.app.goo.gl/2ePynihuTRkq1mGf7" target="_blank" rel="noopener noreferrer"
-                            class="address-link">
-                            <span class="detail-text">1011 N. 12th W. Rexburg, ID 83440</span>
-                        </a>
-                    </div>
-                </div>
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="openTab(event, 'tab-rsvp')" data-i18n="tabRsvp">RSVP &
+                    Registry</button>
+                <button class="tab-btn" onclick="openTab(event, 'tab-qa')" data-i18n="tabQA">Q & A</button>
             </div>
 
-            <hr class="divider">
+            <div id="tab-rsvp" class="tab-content active" style="display: block;">
+                <section class="rsvp-card">
+                    <div id="rsvp-us" class="rsvp-item">
+                        <div class="rsvp-info">
+                            <p class="event-date" data-i18n="usDate">April 18, 2026</p>
+                            <h2 class="event-title" data-i18n="usReception">US Reception</h2>
+                            <a href="https://forms.gle/UjeCFNx4yzDQLetUA" target="_blank" rel="noopener noreferrer"
+                                class="btn" data-i18n="usRsvpBtn">
+                                US Reception RSVP
+                            </a>
+                        </div>
+                        <div class="rsvp-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-i18n="timeLabelUS">Time</span>
+                                <span class="detail-text" data-i18n="timeDescUS">2 P.M. (MST)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label" data-i18n="locationLabelUS">Location</span>
+                                <a href="https://maps.app.goo.gl/2ePynihuTRkq1mGf7" target="_blank"
+                                    rel="noopener noreferrer" class="address-link">
+                                    <span class="detail-text" data-i18n="locationDescUS">1011 N. 12th W. Rexburg, ID
+                                        83440</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-            <div id="rsvp-tw" class="rsvp-item">
-                <div class="rsvp-info">
-                    <p class="event-date">August 29, 2026</p>
-                    <h2 class="event-title">Taiwan Reception</h2>
-                    <a href="https://forms.gle/juA4TT9gWTnfZ8nVA" target="_blank" rel="noopener noreferrer" class="btn">
-                        台灣婚招 RSVP
-                    </a>
-                </div>
-                <div class="rsvp-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Time</span>
-                        <span class="detail-text">2 P.M. (GMT+8)</span>
+                    <hr class="divider">
+
+                    <div id="rsvp-tw" class="rsvp-item">
+                        <div class="rsvp-info">
+                            <p class="event-date" data-i18n="twDate">August 29, 2026</p>
+                            <h2 class="event-title" data-i18n="twReception">Taiwan Reception</h2>
+                            <a href="https://forms.gle/juA4TT9gWTnfZ8nVA" target="_blank" rel="noopener noreferrer"
+                                class="btn" data-i18n="twRsvpBtn">
+                                Taiwan Reception RSVP
+                            </a>
+                        </div>
+                        <div class="rsvp-details">
+                            <div class="detail-item">
+                                <span class="detail-label" data-i18n="timeLabelTW">Time</span>
+                                <span class="detail-text" data-i18n="timeDescTW">2 P.M. (GMT+8)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label" data-i18n="locationLabelTW">Location</span>
+                                <a href="https://maps.app.goo.gl/3j95rpAtuFvWFwZA8" target="_blank"
+                                    rel="noopener noreferrer" class="address-link">
+                                    <span class="detail-text" data-i18n="locationDescTW">桃園市桃園區同安街336巷59號</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Location</span>
-                        <a href="https://maps.app.goo.gl/3j95rpAtuFvWFwZA8" target="_blank" rel="noopener noreferrer"
-                            class="address-link">
-                            <span class="detail-text">桃園市桃園區同安街336巷59號</span>
-                        </a>
+
+                    <hr class="divider">
+
+                    <div id="registry" class="registry-section v2">
+                        <div class="decorative-divider">
+                            <span class="divider-line"></span>
+                            <span class="divider-icon">♡</span>
+                            <span class="divider-line"></span>
+                        </div>
+                        <div class="registry-info">
+                            <span class="handwritten-accent" data-i18n="registryNote">A note on gifts</span>
+                            <h2 class="event-title" data-i18n="registryTitle">Registry <span
+                                    class="accent-ampersand">&</span> Gifting</h2>
+                            <p class="registry-message" data-i18n="registryMsg">
+                                Your presence is the greatest gift, but if you wish to honor us with a gift,<br>
+                                we've provided a few options for your convenience.
+                            </p>
+                            <div class="registry-buttons">
+                                <a href="https://www.amazon.com/wedding/guest-view/Z9OBOJP2RU08" target="_blank"
+                                    rel="noopener noreferrer" class="btn registry-btn amazon-btn" data-i18n="amazonBtn">
+                                    Visit Our Amazon Registry
+                                </a>
+                                <a href="https://venmo.com/u/CHENHSI-WU" target="_blank" rel="noopener noreferrer"
+                                    class="btn registry-btn venmo-btn" data-i18n="venmoBtn">
+                                    Send via Venmo
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
 
-            <hr class="divider">
+            <div id="tab-qa" class="tab-content" style="display: none;">
+                <section class="rsvp-card">
+                    <h2 class="event-title" style="text-align: center; margin-bottom: 2rem;" data-i18n="qaTitle">
+                        Questions <span class="accent-ampersand">&</span> Answers</h2>
 
-            <div id="registry" class="registry-section v2">
-                <div class="decorative-divider">
-                    <span class="divider-line"></span>
-                    <span class="divider-icon">♡</span>
-                    <span class="divider-line"></span>
-                </div>
-                <div class="registry-info">
-                    <span class="handwritten-accent">A note on gifts</span>
-                    <h2 class="event-title">Registry <span class="accent-ampersand">&</span> Gifting</h2>
-                    <p class="registry-message">
-                        Your presence is the greatest gift, but if you wish to honor us with a gift,
-                        we've provided a few options for your convenience.
-                        <br><br>
-                        您的祝福就是我們最好的禮物，但如果您想為我們送上一份心意，我們也準備了以下方式!
-                    </p>
-                    <div class="registry-buttons">
-                        <a href="https://www.amazon.com/wedding/guest-view/Z9OBOJP2RU08" target="_blank"
-                            rel="noopener noreferrer" class="btn registry-btn amazon-btn">
-                            Visit Our Amazon Registry
-                        </a>
-                        <a href="https://venmo.com/u/CHENHSI-WU" target="_blank" rel="noopener noreferrer"
-                            class="btn registry-btn venmo-btn">
-                            Send via Venmo
-                        </a>
+                    <div class="qa-container">
+                        <div class="qa-item">
+                            <button class="qa-question" onclick="toggleQA(this)">
+                                <span data-i18n="q1">What is the dress code?</span>
+                                <span class="qa-icon">+</span>
+                            </button>
+                            <div class="qa-answer" style="max-height: null;">
+                                <p data-i18n="a1">Dress Code: Church / Semi-Formal Lite<br>Colors: Soft Blue, Light Sky
+                                    Blue, Butter Yellow, Soft Orange, Navy<br>Attire: Neat, polished, and
+                                    put-together<br><br>Think spring garden vibes</p>
+                            </div>
+                        </div>
+
+                        <div class="qa-item">
+                            <button class="qa-question" onclick="toggleQA(this)">
+                                <span data-i18n="q2">When should I arrive for the reception?</span>
+                                <span class="qa-icon">+</span>
+                            </button>
+                            <div class="qa-answer" style="max-height: null;">
+                                <p data-i18n="a2">Guests are welcome to arrive about 15–20 minutes early.</p>
+                            </div>
+                        </div>
+
+                        <div class="qa-item">
+                            <button class="qa-question" onclick="toggleQA(this)">
+                                <span data-i18n="q3">When is the RSVP deadline?</span>
+                                <span class="qa-icon">+</span>
+                            </button>
+                            <div class="qa-answer" style="max-height: null;">
+                                <p data-i18n="a3">Please RSVP by the following dates so we can finalize our seating and
+                                    catering.<br>• U.S. Celebration (April 18): Please RSVP by March 25.<br>• Taiwan
+                                    Celebration (August 29): Please RSVP by July 15.</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>
     </main>
 
     <script>
+        // Translations Data
+        const translations = {
+            heroTitle: { en: "Our Wedding", zh: "我們的婚禮" },
+            heroSubtitle: { en: "We can't wait to celebrate with you", zh: "期待與您一同慶祝" },
+            days: { en: "Days", zh: "天" },
+            hours: { en: "Hours", zh: "時" },
+            mins: { en: "Mins", zh: "分" },
+            secs: { en: "Secs", zh: "秒" },
+            tabRsvp: { en: "RSVP & Registry", zh: "出席表單與祝福" },
+            tabQA: { en: "Q & A", zh: "常見問題" },
+            usReception: { en: "US Reception", zh: "美國婚招" },
+            usDate: { en: "April 18, 2026", zh: "2026年4月18日" },
+            usRsvpBtn: { en: "RSVP", zh: "出席表單" },
+            timeLabelUS: { en: "Time", zh: "時間" },
+            timeDescUS: { en: "2 P.M. (MST)", zh: "下午 2 點 (MST)" },
+            locationLabelUS: { en: "Location", zh: "地點" },
+            locationDescUS: { en: "1011 N. 12th W. Rexburg, ID 83440", zh: "1011 N. 12th W. Rexburg, ID 83440" },
+            twReception: { en: "Taiwan Reception", zh: "台灣婚招" },
+            twDate: { en: "August 29, 2026", zh: "2026年8月29日" },
+            twRsvpBtn: { en: "RSVP", zh: "出席表單" },
+            timeLabelTW: { en: "Time", zh: "時間" },
+            timeDescTW: { en: "2 P.M. (GMT+8)", zh: "下午 2 點 (GMT+8)" },
+            locationLabelTW: { en: "Location", zh: "地點" },
+            locationDescTW: { en: "桃園市桃園區同安街336巷59號", zh: "桃園市桃園區同安街336巷59號" },
+            registryNote: { en: "A note on gifts", zh: "關於禮物" },
+            registryTitle: { en: "Registry & Gifting", zh: "婚禮禮物 & 祝福" },
+            registryMsg: {
+                en: "Your presence is the greatest gift, but if you wish to honor us with a gift,<br>we've provided a few options for your convenience.",
+                zh: "您的祝福就是我們最好的禮物，但如果您想為我們送上一份心意，我們也準備了以下方式！"
+            },
+            amazonBtn: { en: "Visit Our Amazon Registry", zh: "前往我們的 Amazon 送禮專區" },
+            venmoBtn: { en: "Send via Venmo", zh: "透過 Venmo 送禮" },
+            qaTitle: { en: "Questions & Answers", zh: "常見問題 Q&A" },
+            q1: { en: "What Should I Wear?｜Dress Code | Add a Touch of Color✨", zh: "我該穿什麼？｜Dress Code | 與我們一起妝點這份色彩✨" },
+            a1: {
+                en: "To create harmonious and beautiful memories in photos, we’ve chosen a palette of soft, gentle colors. We warmly invite you to incorporate these shades into your outfits and help us create the most beautiful scenery on our wedding day:<br><br>Soft Blue Tones: Smoky Blue, Light Blue, Navy<br>Warm Gentle Tones: Peachy Pink, Butter Yellow<br>" +
+                    "<div style='margin: 15px 0; text-align: center;'>" +
+                    "<img src='images/f2e92831-b84e-49ba-a0e4-3672fe1ff24a.jpg' alt='Dress Code Colors' class='dress-code-img'>" +
+                    "</div>" +
+                    "Attire: Semi-Formal / Church Attire<br><br>" +
+                    "💡 For outfit inspiration, try searching these color names online—you’ll find plenty of matching shades and outfit ideas!",
+                zh: "為了讓當天的照片留下最和諧美好的回憶，我們挑選了一組溫柔的色系。誠摯邀請大家在穿搭上加入這些色彩元素，與我們一起構成婚禮最美的風景：<br><br>質感藍色調： 煙霧藍、淡藍色、藏青色<br>暖心柔色調： 裸桃粉（偏粉橘）、奶油黃<br>" +
+                    "<div style='margin: 15px 0; text-align: center;'>" +
+                    "<img src='images/f2e92831-b84e-49ba-a0e4-3672fe1ff24a.jpg' alt='推薦色系' class='dress-code-img'>" +
+                    "</div>" +
+                    "服裝建議：半正式/教會服裝<br><br>" +
+                    "💡 如果想搜尋穿搭靈感，可以直接搜尋上述顏色名稱，就能找到符合的顏色和範例喔！<br>晨希"
+            },
+            q2: { en: "When should I arrive for the reception?", zh: "我應該何時抵達婚禮現場？" },
+            a2: { en: "Guests are welcome to arrive about 15–20 minutes early.", zh: "我們邀請你們可以提早15-20分鐘到達現場！" },
+            q3: { en: "When is the RSVP deadline?", zh: "出席表單什麼時候截止？" },
+            a3: {
+                en: "Please RSVP by the following dates so we can finalize our seating and catering.<br>• U.S. Celebration (April 18): Please RSVP by March 25.<br>• Taiwan Celebration (August 29): Please RSVP by July 15.",
+                zh: "請依照不同場次於以下日期前填寫出席表單，以便我們安排座位與餐點。<br>• 美國場（4 月 18 日）： 請於 3 月 25 日前填寫。<br>• 台灣場（8 月 29 日）： 請於 7 月 15 日前填寫。"
+            }
+        };
+
+        let currentLang = 'en'; // default
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            // Update simple text tags
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[key] && translations[key][lang]) {
+                    el.innerHTML = translations[key][lang];
+                }
+            });
+
+            // Update button label
+            document.getElementById('lang-toggle').innerText = lang === 'en' ? '中文' : 'English';
+
+            // Immediately repaint countdown strings
+            updateCountdown();
+        }
+
+        function toggleLanguage() {
+            const newLang = currentLang === 'en' ? 'zh' : 'en';
+            setLanguage(newLang);
+        }
+
+        // Auto-detect language on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.toLowerCase().includes('zh')) {
+                setLanguage('zh');
+            } else {
+                setLanguage('en');
+            }
+        });
+
         // Target dates with timezones
         const usDate = new Date("2026-04-18T00:00:00-06:00").getTime();
         const twDate = new Date("2026-08-29T00:00:00+08:00").getTime();
@@ -142,27 +300,37 @@
             // Check which date to target
             if (now < usDate) {
                 targetDate = usDate;
-                title = "Counting Down to US Reception";
+                title = currentLang === 'zh' ? "距離美國婚宴還有" : "Counting Down to US Reception";
             } else {
                 targetDate = twDate;
-                title = "Counting Down to Taiwan Reception";
-                // Add passed class to US RSVP
-                document.getElementById('rsvp-us').classList.add('passed');
+                title = currentLang === 'zh' ? "距離台灣婚宴還有" : "Counting Down to Taiwan Reception";
+                const usRsvp = document.getElementById('rsvp-us');
+                if (usRsvp) usRsvp.classList.add('passed');
             }
 
             if (now > twDate) {
                 targetDate = twDate;
-                title = "Event Ended";
-                // Add passed class to US RSVP
-                document.getElementById('rsvp-tw').classList.add('passed');
+                title = currentLang === 'zh' ? "活動已結束" : "Event Ended";
+                const twRsvp = document.getElementById('rsvp-tw');
+                if (twRsvp) twRsvp.classList.add('passed');
             }
 
-            document.getElementById('countdown-title').innerHTML = title;
+            const countdownTitle = document.getElementById('countdown-title');
+            if (countdownTitle) {
+                countdownTitle.innerHTML = title;
+            }
 
             const distance = targetDate - now;
 
             if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "<div class='celebrate-text'>LET'S CELEBRATE!</div>";
+                const countdownBox = document.getElementById("countdown");
+                if (countdownBox && !countdownBox.innerHTML.includes('celebrate-text')) {
+                    countdownBox.innerHTML = `<div class='celebrate-text'>${currentLang === 'zh' ? "一起慶祝吧！" : "LET'S CELEBRATE!"}</div>`;
+                }
+                // if it already includes celebrate-text, maybe language switched, we should update it
+                if (countdownBox && countdownBox.innerHTML.includes('celebrate-text')) {
+                    countdownBox.innerHTML = `<div class='celebrate-text'>${currentLang === 'zh' ? "一起慶祝吧！" : "LET'S CELEBRATE!"}</div>`;
+                }
                 return;
             }
 
@@ -171,14 +339,82 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
-            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            const elDays = document.getElementById("days");
+            const elHours = document.getElementById("hours");
+            const elMinutes = document.getElementById("minutes");
+            const elSeconds = document.getElementById("seconds");
+
+            if (elDays) elDays.innerHTML = days.toString().padStart(2, '0');
+            if (elHours) elHours.innerHTML = hours.toString().padStart(2, '0');
+            if (elMinutes) elMinutes.innerHTML = minutes.toString().padStart(2, '0');
+            if (elSeconds) elSeconds.innerHTML = seconds.toString().padStart(2, '0');
         }
 
         setInterval(updateCountdown, 1000);
-        updateCountdown();
+
+        // Tab Switching Logic
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].style.display = "none";
+                tabContents[i].classList.remove("active");
+            }
+
+            const tabBtns = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Q&A Accordion Logic
+        function toggleQA(btn) {
+            btn.classList.toggle("active");
+            const answer = btn.nextElementSibling;
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        }
+        // High-Fidelity Photo Switcher (Single Tag Swap to keep sharpness)
+        const photoList = [
+            "images/IMG_0464 2.JPG",
+            "images/IMG_0464 2.JPG",
+            "images/IMG_0464 2.JPG"
+        ];
+        let photoIndex = 0;
+        const heroPhoto = document.getElementById('hero-photo');
+
+        // Preload images to avoid flickering
+        photoList.slice(1).forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+
+        function changeHeroPhoto(n) {
+            photoIndex += n;
+            if (photoIndex >= photoList.length) photoIndex = 0;
+            if (photoIndex < 0) photoIndex = photoList.length - 1;
+
+            // Simple fade transition
+            heroPhoto.style.opacity = '0';
+
+            // Wait for fade out, then swap src
+            setTimeout(() => {
+                heroPhoto.src = photoList[photoIndex];
+                // Fade back in once new image starts loading
+                heroPhoto.onload = () => {
+                    heroPhoto.style.opacity = '1';
+                };
+            }, 300);
+        }
     </script>
 </body>
 
