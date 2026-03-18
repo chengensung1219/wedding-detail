@@ -242,7 +242,7 @@
                     "<img src='images/f2e92831-b84e-49ba-a0e4-3672fe1ff24a.jpg' alt='推薦色系' class='dress-code-img'>" +
                     "</div>" +
                     "服裝建議：半正式/教會服裝<br><br>" +
-                    "💡 如果想搜尋穿搭靈感，可以直接搜尋上述顏色名稱，就能找到符合的顏色和範例喔！<br>晨希"
+                    "💡 如果想搜尋穿搭靈感，可以直接搜尋上述顏色名稱，就能找到符合的顏色和範例喔！<br>"
             },
             q2: { en: "When should I arrive for the reception?", zh: "我應該何時抵達婚禮現場？" },
             a2: { en: "Guests are welcome to arrive about 15–20 minutes early.", zh: "我們邀請你們可以提早15-20分鐘到達現場！" },
@@ -253,13 +253,12 @@
             }
         };
 
-        let currentLang = 'en'; // default
+        let currentLang = 'en';
 
         function setLanguage(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
 
-            // Update simple text tags
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[key] && translations[key][lang]) {
@@ -267,10 +266,8 @@
                 }
             });
 
-            // Update button label
             document.getElementById('lang-toggle').innerText = lang === 'en' ? '中文' : 'English';
 
-            // Immediately repaint countdown strings
             updateCountdown();
         }
 
@@ -279,7 +276,6 @@
             setLanguage(newLang);
         }
 
-        // Auto-detect language on load
         window.addEventListener('DOMContentLoaded', () => {
             const userLang = navigator.language || navigator.userLanguage;
             if (userLang.toLowerCase().includes('zh')) {
@@ -289,7 +285,6 @@
             }
         });
 
-        // Target dates with timezones
         const usDate = new Date("2026-04-18T00:00:00-06:00").getTime();
         const twDate = new Date("2026-08-29T00:00:00+08:00").getTime();
 
@@ -297,13 +292,12 @@
             const now = new Date().getTime();
             let targetDate, title;
 
-            // Check which date to target
             if (now < usDate) {
                 targetDate = usDate;
-                title = currentLang === 'zh' ? "距離美國婚宴還有" : "Counting Down to US Reception";
+                title = currentLang === 'zh' ? "距離美國婚招還有" : "Counting Down to US Reception";
             } else {
                 targetDate = twDate;
-                title = currentLang === 'zh' ? "距離台灣婚宴還有" : "Counting Down to Taiwan Reception";
+                title = currentLang === 'zh' ? "距離台灣婚招還有" : "Counting Down to Taiwan Reception";
                 const usRsvp = document.getElementById('rsvp-us');
                 if (usRsvp) usRsvp.classList.add('passed');
             }
@@ -327,7 +321,7 @@
                 if (countdownBox && !countdownBox.innerHTML.includes('celebrate-text')) {
                     countdownBox.innerHTML = `<div class='celebrate-text'>${currentLang === 'zh' ? "一起慶祝吧！" : "LET'S CELEBRATE!"}</div>`;
                 }
-                // if it already includes celebrate-text, maybe language switched, we should update it
+
                 if (countdownBox && countdownBox.innerHTML.includes('celebrate-text')) {
                     countdownBox.innerHTML = `<div class='celebrate-text'>${currentLang === 'zh' ? "一起慶祝吧！" : "LET'S CELEBRATE!"}</div>`;
                 }
@@ -352,7 +346,6 @@
 
         setInterval(updateCountdown, 1000);
 
-        // Tab Switching Logic
         function openTab(evt, tabName) {
             const tabContents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabContents.length; i++) {
@@ -373,7 +366,6 @@
             evt.currentTarget.classList.add("active");
         }
 
-        // Q&A Accordion Logic
         function toggleQA(btn) {
             btn.classList.toggle("active");
             const answer = btn.nextElementSibling;
@@ -383,7 +375,7 @@
                 answer.style.maxHeight = answer.scrollHeight + "px";
             }
         }
-        // High-Fidelity Photo Switcher (Single Tag Swap to keep sharpness)
+
         const photoList = [
             "images/IMG_0464 2.JPG",
             "images/IMG_0464 2.JPG",
@@ -392,7 +384,6 @@
         let photoIndex = 0;
         const heroPhoto = document.getElementById('hero-photo');
 
-        // Preload images to avoid flickering
         photoList.slice(1).forEach(url => {
             const img = new Image();
             img.src = url;
@@ -403,13 +394,11 @@
             if (photoIndex >= photoList.length) photoIndex = 0;
             if (photoIndex < 0) photoIndex = photoList.length - 1;
 
-            // Simple fade transition
             heroPhoto.style.opacity = '0';
 
-            // Wait for fade out, then swap src
             setTimeout(() => {
                 heroPhoto.src = photoList[photoIndex];
-                // Fade back in once new image starts loading
+
                 heroPhoto.onload = () => {
                     heroPhoto.style.opacity = '1';
                 };
