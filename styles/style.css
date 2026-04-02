@@ -502,6 +502,19 @@ body {
     box-shadow: 0 10px 25px rgba(125, 99, 90, 0.3);
 }
 
+.ikea-btn {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.ikea-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 10px 25px rgba(125, 99, 90, 0.3);
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
